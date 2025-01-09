@@ -7,10 +7,11 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04-arm
     strategy:
       matrix:
         version: ['1.19', '1.20', '1.21', '1.22.2']
+        os: [ubuntu-22.04-arm, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
@@ -19,9 +20,14 @@ jobs:
       - run: |
           go version
   docker_info:
-    runs-on: ubuntu-22.04-arm
+    strategy:
+      matrix:
+        os: [ubuntu-22.04-arm, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Get Docker System Info
         run: docker system info | grep -E 'Username|Registry'
+
+        
 
           
