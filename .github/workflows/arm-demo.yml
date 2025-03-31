@@ -24,6 +24,23 @@ jobs:
       - name: Get Docker System Info
         run: docker system info | grep -E 'Username|Registry'
 
+  windows:
+    runs-on: windows-11-arm
+    steps: 
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+      - run: |
+          Get-PSDrive
+      - run: |
+          $env:Path
+      - run: |
+          Get-ChildItem env:
+      - run: |
+          Get-Content "C:\imagedata.json"
+      - run: |
+          Get-ChildItem "C:\Users\runneradmin"
+    
+
         
 
           
